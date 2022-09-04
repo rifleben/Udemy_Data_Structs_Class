@@ -1,5 +1,6 @@
 class Node:
     """Node Class, Creates Node and sets value"""
+
     def __init__(self, value):
         self.value = value
         self.next = None
@@ -8,6 +9,7 @@ class Node:
 
 class DoublyLinkedList:
     """DLL Class"""
+
     def __init__(self, value):
         new_node = Node(value)
         self.head = new_node
@@ -74,7 +76,6 @@ class DoublyLinkedList:
             temp.next = None
         self.length -= 1
 
-
         return temp
 
     def get(self, index):
@@ -90,9 +91,48 @@ class DoublyLinkedList:
                 temp = temp.prev
         return temp
 
-dll = DoublyLinkedList(1)
-dll.append(2)
-dll.append(3)
-dll.prepend(0)
-dll.print_list()
+    def set_value(self, index, value):
+        temp = self.get(index)
+        if temp is not None:
+            temp.value = value
+            return True
+        return True
+
+    def insert(self, index, value):
+        if index < 0 or index >= self.length:
+            return False
+        if index == 0:
+            return self.prepend(value)
+        if index == self.length:
+            return self.append(value)
+
+        new_node = Node(value)
+        before = self.get(index - 1)
+        after = before.next
+        new_node.prev = before
+        new_node.next = after
+        before.next = new_node
+        after.prev = new_node
+
+        self.length += 1
+        return True
+
+    def remove(self, index):
+        if index < 0 or index >= self.length:
+            return None
+        if index == 0:
+            return self.pop_first()
+        if index == self.length - 1:
+            return self.pop()
+
+        temp = self.get(index)
+        temp.next.prev = temp.prev
+        temp.prev.next = temp.next
+
+        temp.next = None
+        temp.prev = None
+
+        self.length -= 1
+
+        return temp
 
