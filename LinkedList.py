@@ -1,4 +1,5 @@
 class Node:
+    """Node Class, Creates Node and sets value"""
     def __init__(self, value):
         self.value = value
         self.next = None
@@ -145,10 +146,3 @@ class LinkedList:
             print(temp.value)
             temp = temp.next
 
-
-ll = LinkedList(2)
-ll.append(3)
-ll.prepend(1)
-ll.insert(1, "YeeHaw")
-ll.remove(1)
-ll.print_list()
